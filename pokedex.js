@@ -20,21 +20,22 @@ window.onload = async function() {
 async function getPokemon(num) {
     let url = "https://pokeapi.co/api/v2/pokemon/"+ num.toString();
 
-    let pokemonRes = await fetch(url);
-    let pokemon = await pokemonRes.json();
+    let pokemonResource = await fetch(url);
+    let pokemon = await pokemonResource.json();
     
     let pokemonName = pokemon["name"];
     let pokemonTypes = pokemon["types"];
     let pokemonImg = pokemon["sprites"]["front_default"];
+    let pokemonCry = pokemon["cries"]
 
-    let specieasRes = await fetch(pokemon["species"]["url"]);
-    let pokemonSpecieas = await specieasRes.json()
+    let specieasResource = await fetch(pokemon["species"]["url"]);
+    let pokemonSpecieas = await specieasResource.json()
 
     let pokemonDescription = pokemonSpecieas["flavor_text_entries"][2]["flavor_text"]
     pokemonDescription = pokemonDescription.replace(/\f/g, " ");
 
     pokedex[num] = {"name" : pokemonName, "img" : pokemonImg,
-                    "types" : pokemonTypes, "description" : pokemonDescription};
+                    "types" : pokemonTypes, "description" : pokemonDescription, "cries": pokemonCry};
 
 }
 
@@ -54,6 +55,10 @@ function updatePokemon(){
         type.classList.add(types[i]["type"]["name"]) 
         typesDiv.append(type)
     }
+
+    let sound = new Audio(pokedex[this.id]["cries"]["latest"])
+    sound.volume = 0.7
+    sound.play();
 
     // update description
     document.getElementById("pokemon-description").innerText = pokedex[this.id]["description"]
