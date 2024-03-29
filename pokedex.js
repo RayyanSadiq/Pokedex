@@ -4,7 +4,7 @@ let pokedex = {};
 
 window.onload = async function() {
    
-    for (let i = 1; i <= 151; i++){
+    for (let i = 1; i <= pokemonCount; i++){
         await getPokemon(i);
 
         let pokemon = document.createElement("div");
@@ -30,7 +30,7 @@ async function getPokemon(num) {
     let specieasRes = await fetch(pokemon["species"]["url"]);
     let pokemonSpecieas = await specieasRes.json()
 
-    let pokemonDescription = pokemonSpecieas["flavor_text_entries"][1]["flavor_text"]
+    let pokemonDescription = pokemonSpecieas["flavor_text_entries"][2]["flavor_text"]
     pokemonDescription = pokemonDescription.replace(/\f/g, " ");
 
     pokedex[num] = {"name" : pokemonName, "img" : pokemonImg,
