@@ -1,12 +1,16 @@
-
 const pokemonCount = 151;
 let pokedex = {};
 
 window.onload = async function() {
-   
-    for (let i = 1; i <= pokemonCount; i++){
-        await getPokemon(i);
+    const promises = [];
 
+    for (let i = 1; i <= pokemonCount; i++){
+        promises.push(getPokemon(i));
+    }
+
+    await Promise.all(promises);
+
+    for (let i = 1; i <= pokemonCount; i++){
         let pokemon = document.createElement("div");
         pokemon.id = i;
         pokemon.innerText = i.toString() + ". " + pokedex[i]["name"].toUpperCase();
@@ -14,7 +18,6 @@ window.onload = async function() {
         pokemon.addEventListener("click", updatePokemon)
         document.getElementById("pokemon-list").append(pokemon)
     }
-    
 }
 
 async function getPokemon(num) {
@@ -34,9 +37,13 @@ async function getPokemon(num) {
     let pokemonDescription = pokemonSpecieas["flavor_text_entries"][2]["flavor_text"]
     pokemonDescription = pokemonDescription.replace(/\f/g, " ");
 
-    pokedex[num] = {"name" : pokemonName, "img" : pokemonImg,
-                    "types" : pokemonTypes, "description" : pokemonDescription, "cries": pokemonCry};
-
+    pokedex[num] = {
+        "name" : pokemonName, 
+        "img" : pokemonImg,
+        "types" : pokemonTypes, 
+        "description" : pokemonDescription, 
+        "cries": pokemonCry
+    };
 }
 
 function updatePokemon(){
@@ -57,7 +64,7 @@ function updatePokemon(){
     }
 
     let sound = new Audio(pokedex[this.id]["cries"]["latest"])
-    sound.volume = 0.7
+    sound.volume = 0.2
     sound.play();
 
     // update description

@@ -10,7 +10,6 @@ body {
     background: url(EntryBackground.png) no-repeat;
     background-size: cover;
     image-rendering: pixelated;
-    
     flex-grow: 4;
 }
 
@@ -54,25 +53,21 @@ body {
     margin-top: 10px;
 }
 
-.fire {
-    background-color: orange;
+.type-box {
+    padding: 4px;
+    margin: 5px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: whitesmoke;
+ 
 }
-.electric {
-    background-color: yellow;
-}
-.grass {
-    background-color: green;
-}
-.poison {
-    background-color: purple;
-}
-.water {
-    background-color: rgb(37, 174, 238);
-}
-.bug {
-    color: black;
-    background-color: rgb(184, 241, 49);
-}
+
+.fire { background-color: orange; }
+.electric { background-color: yellow; }
+.grass { background-color: green; }
+.poison { background-color: purple; }
+.water { background-color: rgb(37, 174, 238); }
+.bug { color: black; background-color: rgb(184, 241, 49); }
 
 .pokemon-name {
     border: 1px solid black;
@@ -83,14 +78,7 @@ body {
      
 }
 
-.type-box {
-    padding: 4px;
-    margin: 5px;
-    border: 1px solid white;
-    border-radius: 10px;
-    color: whitesmoke;
- 
-}
+
 
 
 
